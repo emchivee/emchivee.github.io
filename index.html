@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Gift For You</title>
+    <style>
+        :root {
+            --primary-pink: #ff85a2;
+            --soft-purple: #f1e4ff;
+            --glass: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #444;
+        }
+
+        /* --- LOGIN SECTION --- */
+        #gatekeeper {
+            text-align: center;
+            background: var(--glass);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            transition: opacity 0.5s ease;
+        }
+
+        .gift-icon { font-size: 4rem; margin-bottom: 1rem; }
+        
+        input[type="password"] {
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-pink);
+            width: 80%;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        button {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        button:hover { transform: scale(1.05); }
+
+        /* --- DASHBOARD SECTION --- */
+        #dashboard {
+            display: none; /* Hidden by default */
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .photo-placeholder {
+            height: 150px;
+            background: #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: #888;
+        }
+
+        h1 { color: var(--primary-pink); }
+    </style>
+</head>
+<body>
+
+    <div id="gatekeeper">
+        <div class="gift-icon">🎁</div>
+        <h2>You have a gift waiting!</h2>
+        <p>Enter the secret code to open it:</p>
+        <input type="password" id="passInput" placeholder="Secret Code...">
+        <br>
+        <button onclick="checkPassword()">Unlock Gift</button>
+        <p id="errorMsg" style="color: red; display: none; font-size: 0.8rem;">Oops! Try again.</p>
+    </div>
+
+    <div id="dashboard">
+        <div class="card">
+            <h1>Happy Birthday/Anniversary! 🎉</h1>
+            <p>This is a little corner of the internet just for you. I built this to remind you of how special you are.</p>
+        </div>
+
+        <div class="card">
+            <h3>Our Memories 📸</h3>
+            <div class="gallery">
+                <div class="photo-placeholder">Your Photo 1</div>
+                <div class="photo-placeholder">Your Photo 2</div>
+                <div class="photo-placeholder">Your Photo 3</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>A Special Message 💌</h3>
+            <p>"Life is better with you in it. Thank you for being who you are."</p>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const secret = "1234"; // <-- CHANGE YOUR PASSWORD HERE
+            const input = document.getElementById('passInput').value;
+            const gate = document.getElementById('gatekeeper');
+            const dash = document.getElementById('dashboard');
+            const error = document.getElementById('errorMsg');
+
+            if (input === secret) {
+                // Hide login
+                gate.style.display = 'none';
+                // Show dashboard
+                dash.style.display = 'block';
+                setTimeout(() => {
+                    dash.style.opacity = '1';
+                }, 10);
+            } else {
+                error.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
