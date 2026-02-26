@@ -60,7 +60,7 @@
 
         /* --- DASHBOARD SECTION --- */
         #dashboard {
-            display: none; /* Hidden by default */
+            display: none; 
             width: 90%;
             max-width: 800px;
             padding: 2rem;
@@ -76,21 +76,11 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-     <div class="gallery">
-    <img src="https://i.imgur.com/jxGt0yb.png" style="width:100%; border-radius:10px; margin-bottom:10px;">
-    <img src="https://i.imgur.com/YNpKxsc.png" style="width:100%; border-radius:10px; margin-bottom:10px;">
-    <img src="https://i.imgur.com/Y8xLDuq.png" style="width:100%; border-radius:10px; margin-bottom:10px;">
-</div>
-
-        .photo-placeholder {
-            height: 150px;
-            background: #ddd;
+        .gallery img {
+            width: 100%;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-style: italic;
-            color: #888;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         h1 { color: var(--primary-pink); }
@@ -110,7 +100,8 @@
 
     <div id="dashboard">
         <div class="card">
-            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6KCEL11alMnIccqpRBrrN1?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px" src="http://googleusercontent.com/spotify.com/4" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            
             <h1>Happy Birthday, Ma vie! 🎉</h1>
             <p>This is a little corner of the internet just for you. I built this to remind you of how special you are.</p>
         </div>
@@ -118,33 +109,29 @@
         <div class="card">
             <h3>Our Memories 📸</h3>
             <div class="gallery">
-            <img src="https://i.imgur.com/jxGt0yb.png" style="width:100%; border-radius:10px; margin-bottom:10px;">
-            <img src="https://i.imgur.com/YNpKxsc.png" style="width:100%; border-radius:10px; margin-bottom:10px;">
-            <img src="https://i.imgur.com/Y8xLDuq.png" style="width:100%; border-radius:10px; margin-bottom:10px;">
-    </div>
+                <img src="https://i.imgur.com/jxGt0yb.png">
+                <img src="https://i.imgur.com/YNpKxsc.png">
+                <img src="https://i.imgur.com/Y8xLDuq.png">
             </div>
         </div>
 
         <div class="card">
             <h3>A Special Message 💌</h3>
-            <p>"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.
-
-It’s your birthday, yet I feel like I’m the one receiving the gift because having you in my life is the greatest present I could ever ask for. I know life will bring challenges, but I truly believe we can overcome anything together. I can’t wait to see you soon and hold you close. Happy Birthday, my baby!"</p>
+            <p>"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.<br><br>
+            It’s your birthday, yet I feel like I’m the one receiving the gift because having you in my life is the greatest present I could ever ask for. I know life will bring challenges, but I truly believe we can overcome anything together. I can’t wait to see you soon and hold you close. Happy Birthday, my baby!"</p>
         </div>
     </div>
 
     <script>
         function checkPassword() {
-            const secret = "022797"; // <-- CHANGE YOUR PASSWORD HERE
+            const secret = "022797"; 
             const input = document.getElementById('passInput').value;
             const gate = document.getElementById('gatekeeper');
             const dash = document.getElementById('dashboard');
             const error = document.getElementById('errorMsg');
 
             if (input === secret) {
-                // Hide login
                 gate.style.display = 'none';
-                // Show dashboard
                 dash.style.display = 'block';
                 setTimeout(() => {
                     dash.style.opacity = '1';
