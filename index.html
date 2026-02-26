@@ -22,7 +22,6 @@
             color: #444;
         }
 
-        /* --- LOGIN SECTION --- */
         #gatekeeper {
             text-align: center;
             background: var(--glass);
@@ -58,7 +57,6 @@
 
         button:hover { transform: scale(1.05); }
 
-        /* --- DASHBOARD SECTION --- */
         #dashboard {
             display: none; 
             width: 90%;
@@ -82,16 +80,10 @@
             border-radius: 10px;
             margin-bottom: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
         }
 
-        .gallery img:hover {
-            transform: scale(1.02);
-        }
-
-        h1 { color: var(--primary-pink); margin-top: 20px; }
-        h3 { color: var(--primary-pink); }
-        .message-text { text-align: left; line-height: 1.6; }
+        h1, h3 { color: var(--primary-pink); }
+        .message-text { text-align: left; line-height: 1.6; white-space: pre-line; }
     </style>
 </head>
 <body>
@@ -108,7 +100,7 @@
 
     <div id="dashboard">
         <div class="card">
-            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://developer.spotify.com/documentation/embeds/tutorials/creating-an-embed" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1P0U6tqS6T1m9o0L4P3K8P?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             
             <h1>Happy Birthday, Ma vie! 🎉</h1>
             <p>This is a little corner of the internet just for you.</p>
@@ -119,4 +111,36 @@
             <div class="gallery">
                 <img src="https://i.imgur.com/jxGt0yb.png" alt="Memory 1">
                 <img src="https://i.imgur.com/YNpKxsc.png" alt="Memory 2">
-                <img src="
+                <img src="https://i.imgur.com/Y8xLDuq.png" alt="Memory 3">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>A Special Message 💌</h3>
+            <p class="message-text">"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.
+
+            It’s your birthday, yet I feel like I’m the one receiving the gift because having you in my life is the greatest present I could ever ask for. I know life will bring challenges, but I truly believe we can overcome anything together. I can’t wait to see you soon and hold you close. Happy Birthday, my baby!"</p>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const secret = "022797"; 
+            const input = document.getElementById('passInput').value;
+            const gate = document.getElementById('gatekeeper');
+            const dash = document.getElementById('dashboard');
+            const error = document.getElementById('errorMsg');
+
+            if (input === secret) {
+                gate.style.display = 'none';
+                dash.style.display = 'block';
+                setTimeout(() => {
+                    dash.style.opacity = '1';
+                }, 10);
+            } else {
+                error.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
