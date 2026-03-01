@@ -1,180 +1,335 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>A Special Gift For You</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Indie+Flower&display=swap" rel="stylesheet">
+
     <style>
+
         :root {
+
             --primary-pink: #ff85a2;
-            --tape-color: rgba(255, 255, 255, 0.6);
+
+            --soft-purple: #f1e4ff;
+
+            --glass: rgba(255, 255, 255, 0.8);
+
         }
+
+
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #fce4ec;
-            background-image: radial-gradient(#ffc1e3 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+
             margin: 0;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             min-height: 100vh;
+
+            color: #444;
+
         }
 
-        /* --- LOGIN SCREEN (Stay on Top) --- */
+
+
         #gatekeeper {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+
             text-align: center;
-            background: white;
-            padding: 2.5rem;
+
+            background: var(--glass);
+
+            padding: 3rem;
+
             border-radius: 20px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
-            border: 6px double var(--primary-pink);
-            max-width: 320px;
-            width: 85%;
-            z-index: 10000; /* Highest priority */
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+            backdrop-filter: blur(10px);
+
+            transition: opacity 0.5s ease;
+
         }
+
+
+
+        .gift-icon { font-size: 4rem; margin-bottom: 1rem; }
+
+        
 
         input[type="password"] {
+
             padding: 12px;
+
             border-radius: 10px;
+
             border: 2px solid var(--primary-pink);
+
             width: 80%;
-            margin-bottom: 1.5rem;
-            font-size: 16px; 
-            text-align: center;
+
+            margin-bottom: 1rem;
+
+            font-size: 1rem;
+
             outline: none;
+
         }
+
+
 
         button {
+
             background: var(--primary-pink);
+
             color: white;
+
             border: none;
-            padding: 15px 30px;
+
+            padding: 12px 25px;
+
             border-radius: 10px;
+
             cursor: pointer;
+
             font-weight: bold;
-            font-size: 1.1rem;
-            width: 100%;
-            display: block;
+
+            transition: transform 0.2s;
+
         }
 
-        /* --- DASHBOARD (Hidden) --- */
+
+
+        button:hover { transform: scale(1.05); }
+
+
+
         #dashboard {
+
             display: none; 
-            width: 95%;
-            max-width: 600px;
-            padding: 40px 10px;
+
+            width: 90%;
+
+            max-width: 800px;
+
+            padding: 2rem;
+
             opacity: 0;
+
             transition: opacity 1s ease;
+
         }
+
+
 
         .card {
-            background: white;
-            padding: 1.5rem;
-            margin-bottom: 3.5rem;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-            position: relative;
+
+            background: var(--glass);
+
+            padding: 2rem;
+
+            border-radius: 15px;
+
+            margin-bottom: 1.5rem;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+
+            text-align: center;
+
         }
 
-        h1, h3 { font-family: 'Dancing Script', cursive; color: var(--primary-pink); }
+
+
+        /* Video Container to make YouTube responsive */
 
         .video-container {
+
             position: relative;
-            padding-bottom: 56.25%;
+
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+
             height: 0;
+
             overflow: hidden;
-            border: 8px solid white;
-            margin-bottom: 10px;
+
+            border-radius: 12px;
+
+            margin-bottom: 20px;
+
         }
+
+
 
         .video-container iframe {
+
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            border: 0;
+
         }
+
+
 
         .gallery img {
-            background: white;
-            padding: 12px 12px 45px 12px;
-            width: 90%;
-            border: 1px solid #eee;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            margin-bottom: 30px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+
+            width: 100%;
+
+            border-radius: 10px;
+
+            margin-bottom: 15px;
+
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
         }
 
-        .message-card {
-            background: #fffde7;
-            font-family: 'Indie Flower', cursive;
-            font-size: 1.25rem;
-            line-height: 1.6;
-            border-left: 8px solid #ffd54f;
-            text-align: left;
-        }
+
+
+        h1, h3 { color: var(--primary-pink); }
+
+        .message-text { text-align: left; line-height: 1.6; white-space: pre-line; }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <div id="gatekeeper">
-        <div style="font-size: 3rem; margin-bottom: 10px;">💌</div>
-        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--primary-pink); margin-top:0;">For My Love</h2>
-        <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Enter our special date to open:</p>
-        <input type="password" id="passInput" placeholder="MMDDYY">
-        <button onclick="checkPassword()">Open Letter</button>
-        <p id="errorMsg" style="color: #ff5252; display: none; font-size: 0.85rem; margin-top: 15px;">Try again, my love.</p>
+
+        <div class="gift-icon">🎁</div>
+
+        <h2>You have a gift waiting!</h2>
+
+        <p>Enter the secret code to open it:</p>
+
+        <input type="password" id="passInput" placeholder="Secret Code...">
+
+        <br>
+
+        <button onclick="checkPassword()">Unlock Gift</button>
+
+        <p id="errorMsg" style="color: red; display: none; font-size: 0.8rem;">Oops! Try again.</p>
+
     </div>
+
+
 
     <div id="dashboard">
+
         <div class="card">
+
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Egy8RZKxC5k" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                <iframe src="https://www.youtube.com/embed/Egy8RZKxC5k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <iframe src="https://www.youtube.com/embed/Egy8RZKxC5k?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
             </div>
-            <p style="font-size: 0.8rem; color: #999;">(Tap the video if the music doesn't start!)</p>
+
+            
+
             <h1>Happy Birthday, Ma vie! 🎉</h1>
-            <p style="font-family: 'Indie Flower'; font-size: 1.2rem;">A little corner of the internet, just for you.</p>
+
+            <p>This is a little corner of the internet just for you.</p>
+
         </div>
 
-        <div class="card" style="background: transparent; box-shadow: none;">
-            <h3 style="font-size: 2.5rem; text-align: center;">Our Memories 📸</h3>
-            <img src="https://i.imgur.com/kmXZdMD.png" class="gallery" style="transform: rotate(-2deg);">
-            <img src="https://i.imgur.com/YNpKxsc.png" class="gallery" style="transform: rotate(2deg);">
-            <img src="https://i.imgur.com/Y8xLDuq.png" class="gallery" style="transform: rotate(-1deg);">
+
+
+        <div class="card">
+
+            <h3>Our Memories 📸</h3>
+
+            <div class="gallery">
+
+                <img src="https://i.imgur.com/kmXZdMD.png" alt="Memory 1">
+
+                <img src="https://i.imgur.com/YNpKxsc.png" alt="Memory 2">
+
+                <img src="https://i.imgur.com/Y8xLDuq.png" alt="Memory 3">
+
+            </div>
+
         </div>
 
-        <div class="card message-card">
+
+
+        <div class="card">
+
             <h3>A Special Message 💌</h3>
-            <p>"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.<br><br>
+
+            <p class="message-text">"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.
+
+
+
             It’s your birthday, yet I feel like I’m the one receiving the gift because having you in my life is the greatest present I could ever ask for. I know life will bring challenges, but I truly believe we can overcome anything together. I can’t wait to see you soon and hold you close. Happy Birthday, my baby!"</p>
+
         </div>
+
     </div>
 
+
+
     <script>
+
         function checkPassword() {
+
             const secret = "022797"; 
+
             const input = document.getElementById('passInput').value;
+
             const gate = document.getElementById('gatekeeper');
+
             const dash = document.getElementById('dashboard');
+
             const error = document.getElementById('errorMsg');
 
-            if (input.trim() === secret) {
+
+
+            if (input === secret) {
+
                 gate.style.display = 'none';
-                document.body.style.display = 'block';
+
                 dash.style.display = 'block';
+
                 setTimeout(() => {
+
                     dash.style.opacity = '1';
-                }, 100);
+
+                }, 10);
+
             } else {
+
                 error.style.display = 'block';
-                document.getElementById('passInput').value = "";
+
             }
+
         }
+
     </script>
+
 </body>
+
 </html>
