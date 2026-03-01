@@ -59,4 +59,122 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.1rem
+            font-size: 1.1rem;
+            width: 100%;
+            display: block;
+        }
+
+        /* --- DASHBOARD (Hidden) --- */
+        #dashboard {
+            display: none; 
+            width: 95%;
+            max-width: 600px;
+            padding: 40px 10px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 3.5rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        h1, h3 { font-family: 'Dancing Script', cursive; color: var(--primary-pink); }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border: 8px solid white;
+            margin-bottom: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .gallery img {
+            background: white;
+            padding: 12px 12px 45px 12px;
+            width: 90%;
+            border: 1px solid #eee;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .message-card {
+            background: #fffde7;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            border-left: 8px solid #ffd54f;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="gatekeeper">
+        <div style="font-size: 3rem; margin-bottom: 10px;">💌</div>
+        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--primary-pink); margin-top:0;">For My Love</h2>
+        <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Enter our special date to open:</p>
+        <input type="password" id="passInput" placeholder="MMDDYY">
+        <button onclick="checkPassword()">Open Letter</button>
+        <p id="errorMsg" style="color: #ff5252; display: none; font-size: 0.85rem; margin-top: 15px;">Try again, my love.</p>
+    </div>
+
+    <div id="dashboard">
+        <div class="card">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/Egy8RZKxC5k" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <p style="font-size: 0.8rem; color: #999;">(Tap the video if the music doesn't start!)</p>
+            <h1>Happy Birthday, Ma vie! 🎉</h1>
+            <p style="font-family: 'Indie Flower'; font-size: 1.2rem;">A little corner of the internet, just for you.</p>
+        </div>
+
+        <div class="card" style="background: transparent; box-shadow: none;">
+            <h3 style="font-size: 2.5rem; text-align: center;">Our Memories 📸</h3>
+            <img src="https://i.imgur.com/kmXZdMD.png" class="gallery" style="transform: rotate(-2deg);">
+            <img src="https://i.imgur.com/YNpKxsc.png" class="gallery" style="transform: rotate(2deg);">
+            <img src="https://i.imgur.com/Y8xLDuq.png" class="gallery" style="transform: rotate(-1deg);">
+        </div>
+
+        <div class="card message-card">
+            <h3>A Special Message 💌</h3>
+            <p>"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.<br><br>
+            It’s your birthday, yet I feel like I’m the one receiving the gift because having you in my life is the greatest present I could ever ask for. I know life will bring challenges, but I truly believe we can overcome anything together. I can’t wait to see you soon and hold you close. Happy Birthday, my baby!"</p>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const secret = "022797"; 
+            const input = document.getElementById('passInput').value;
+            const gate = document.getElementById('gatekeeper');
+            const dash = document.getElementById('dashboard');
+            const error = document.getElementById('errorMsg');
+
+            if (input.trim() === secret) {
+                gate.style.display = 'none';
+                document.body.style.display = 'block';
+                dash.style.display = 'block';
+                setTimeout(() => {
+                    dash.style.opacity = '1';
+                }, 100);
+            } else {
+                error.style.display = 'block';
+                document.getElementById('passInput').value = "";
+            }
+        }
+    </script>
+</body>
+</html>
