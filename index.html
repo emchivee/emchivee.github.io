@@ -21,18 +21,16 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            transition: all 0.5s ease;
         }
 
-        /* This class will be added via JavaScript to fix the layout after login */
+        /* Layout fix for after login */
         body.unlocked {
             display: block;
             padding: 20px 0;
+            overflow-x: hidden;
         }
 
         #gatekeeper {
-            position: relative;
-            z-index: 9999;
             text-align: center;
             background: white;
             padding: 2.5rem;
@@ -41,6 +39,7 @@
             border: 6px double var(--primary-pink);
             max-width: 320px;
             width: 85%;
+            z-index: 9999;
         }
 
         input[type="password"] {
@@ -49,9 +48,8 @@
             border: 2px solid var(--primary-pink);
             width: 80%;
             margin-bottom: 1.5rem;
-            font-size: 16px; 
+            font-size: 16px;
             text-align: center;
-            outline: none;
         }
 
         button {
@@ -62,7 +60,6 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.1rem;
             width: 100%;
         }
 
@@ -83,40 +80,58 @@
             position: relative;
         }
 
-        h1, h3 { font-family: 'Dancing Script', cursive; color: var(--primary-pink); }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border: 8px solid white;
-        }
-
-        .video-container iframe {
+        /* Tape Effect */
+        .card::before {
+            content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 30px;
+            background: var(--tape-color);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .gallery img {
-            background: white;
-            padding: 10px 10px 40px 10px;
-            width: 90%;
-            border: 1px solid #eee;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            display: block;
-            margin: 0 auto 20px auto;
+        h1, h3 { font-family: 'Dancing Script', cursive; color: var(--primary-pink); text-align: center; }
+
+        /* --- THE PHOTO GALLERY FIX --- */
+        .polaroid-gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 20px 0;
         }
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 50px 15px; /* Extra bottom padding for the 'caption' area */
+            width: 85%; /* Prevents images from being too huge */
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid #eee;
+            transition: transform 0.3s;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid #f0f0f0;
+        }
+
+        /* Scrapbook scattering effect */
+        .polaroid:nth-child(1) { transform: rotate(-3deg); }
+        .polaroid:nth-child(2) { transform: rotate(4deg); }
+        .polaroid:nth-child(3) { transform: rotate(-2deg); }
 
         .message-card {
             background: #fffde7;
             font-family: 'Indie Flower', cursive;
-            font-size: 1.25rem;
-            line-height: 1.6;
+            font-size: 1.3rem;
             border-left: 8px solid #ffd54f;
-            text-align: left;
-            padding: 2rem;
+            padding: 2.5rem;
         }
     </style>
 </head>
@@ -124,33 +139,32 @@
 
     <div id="gatekeeper">
         <div style="font-size: 3rem; margin-bottom: 10px;">💌</div>
-        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--primary-pink); margin-top:0;">For My Love</h2>
-        <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Enter our special date to open:</p>
-        <input type="password" id="passInput" placeholder="MMDDYY" autocomplete="off">
-        <button id="unlockBtn" onclick="checkPassword()">Open Letter</button>
-        <p id="errorMsg" style="color: #ff5252; display: none; font-size: 0.85rem; margin-top: 15px;">Oops! Try again, my love.</p>
+        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--primary-pink);">A Letter for You</h2>
+        <input type="password" id="passInput" placeholder="Enter code...">
+        <button onclick="checkPassword()">Open Letter</button>
     </div>
 
     <div id="dashboard">
         <div class="card">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Egy8RZKxC5k" allowfullscreen></iframe>
-            </div>
-            <h1>Happy Birthday, Ma vie! 🎉</h1>
-            <p style="font-family: 'Indie Flower'; font-size: 1.2rem;">A little corner of the internet, just for you.</p>
+            <h1 style="font-size: 2.5rem;">Happy Birthday, Ma vie! 🎉</h1>
+            <p style="font-family: 'Indie Flower'; text-align:center;">A little corner of the internet, just for you.</p>
         </div>
 
-        <div class="card" style="background: transparent; box-shadow: none;">
-            <h3 style="font-size: 2.5rem; text-align: center;">Our Memories 📸</h3>
-            <img src="https://i.imgur.com/kmXZdMD.png" class="gallery" style="transform: rotate(-2deg);">
-            <img src="https://i.imgur.com/YNpKxsc.png" class="gallery" style="transform: rotate(2deg);">
-            <img src="https://i.imgur.com/Y8xLDuq.png" class="gallery" style="transform: rotate(-1deg);">
+        <div class="polaroid-gallery">
+            <div class="polaroid">
+                <img src="https://i.imgur.com/kmXZdMD.png">
+            </div>
+            <div class="polaroid">
+                <img src="https://i.imgur.com/YNpKxsc.png">
+            </div>
+            <div class="polaroid">
+                <img src="https://i.imgur.com/Y8xLDuq.png">
+            </div>
         </div>
 
         <div class="card message-card">
-            <h3>A Special Message 💌</h3>
-            <p>"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.<br><br>
-            It’s your birthday, yet I feel like I’m the one receiving the gift because having you in my life is the greatest present I could ever ask for. I know life will bring challenges, but I truly believe we can overcome anything together. I can’t wait to see you soon and hold you close. Happy Birthday, my baby!"</p>
+            <h3 style="color: #fbc02d; text-align: left;">A Special Message 💌</h3>
+            <p>"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting... having you in my life is the greatest present I could ever ask for. I can’t wait to see you soon and hold you close. Happy Birthday, my baby!"</p>
         </div>
     </div>
 
@@ -158,37 +172,15 @@
         function checkPassword() {
             const secret = "022797"; 
             const input = document.getElementById('passInput').value;
-            const gate = document.getElementById('gatekeeper');
-            const dash = document.getElementById('dashboard');
-            const error = document.getElementById('errorMsg');
-
-            // Using trim to ensure no hidden spaces break the check
             if (input.trim() === secret) {
-                // Change body layout to allow scrolling
                 document.body.classList.add('unlocked');
-                
-                // Hide login, show dashboard
-                gate.style.display = 'none';
-                dash.style.display = 'block';
-                
-                // Smooth fade in
-                setTimeout(() => {
-                    dash.style.opacity = '1';
-                }, 50);
-                
-                window.scrollTo(0,0);
+                document.getElementById('gatekeeper').remove();
+                document.getElementById('dashboard').style.display = 'block';
+                setTimeout(() => { document.getElementById('dashboard').style.opacity = '1'; }, 50);
             } else {
-                error.style.display = 'block';
-                document.getElementById('passInput').value = "";
+                alert("Try again, my love!");
             }
         }
-
-        // Allow pressing "Enter" on keyboard to unlock
-        document.getElementById("passInput").addEventListener("keyup", function(event) {
-            if (event.key === "Enter") {
-                checkPassword();
-            }
-        });
     </script>
 </body>
 </html>
