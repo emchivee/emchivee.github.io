@@ -9,12 +9,11 @@
         :root {
             --primary-pink: #ff85a2;
             --cream: #fff9f0;
-            --tape-color: rgba(255, 255, 255, 0.4);
+            --tape-color: rgba(255, 255, 255, 0.6);
         }
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            /* Dreamy Garden/Paper Background */
             background-color: #fce4ec;
             background-image: radial-gradient(#ffc1e3 0.5px, transparent 0.5px);
             background-size: 20px 20px;
@@ -24,16 +23,20 @@
             align-items: center;
             min-height: 100vh;
             color: #444;
+            overflow-x: hidden;
         }
 
         /* --- LOGIN SECTION --- */
         #gatekeeper {
             text-align: center;
             background: white;
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 8px double var(--primary-pink);
+            border: 6px double var(--primary-pink);
+            max-width: 320px;
+            width: 90%;
+            z-index: 100;
         }
 
         input[type="password"] {
@@ -43,6 +46,7 @@
             width: 80%;
             margin-bottom: 1rem;
             font-size: 1rem;
+            text-align: center;
         }
 
         button {
@@ -53,6 +57,7 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1rem;
         }
 
         /* --- DASHBOARD SECTION --- */
@@ -68,66 +73,40 @@
         .card {
             background: white;
             padding: 1.5rem;
-            border-radius: 2px;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
             position: relative;
+            transform: rotate(-1deg);
         }
 
-        /* Handwriting Style for headings */
         h1, h3 { 
             font-family: 'Dancing Script', cursive; 
             color: var(--primary-pink);
-            font-size: 2.2rem;
+            margin-bottom: 10px;
         }
 
-        /* Polaroid Photo Effect */
-        .gallery img {
-            background: white;
-            padding: 10px 10px 40px 10px; /* Thicker bottom for that Polaroid look */
-            width: 85%;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-            transition: transform 0.3s;
-        }
-
-        /* Random tilts for the photos */
-        .gallery img:nth-child(odd) { transform: rotate(-3deg); }
-        .gallery img:nth-child(even) { transform: rotate(3deg); }
-        .gallery img:hover { transform: rotate(0deg) scale(1.05); z-index: 10; }
-
-        /* The Sticky Note / Letter Style */
-        .message-card {
-            background: #fffde7; /* Soft yellow sticky note */
-            font-family: 'Indie Flower', cursive;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            padding: 2rem;
-            border-left: 5px solid #ffd54f;
-        }
-
-        /* Tape effect on top of cards */
+        /* Tape Effect */
         .card::before {
             content: "";
             position: absolute;
             top: -15px;
             left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 30px;
+            transform: translateX(-50%) rotate(2deg);
+            width: 120px;
+            height: 35px;
             background: var(--tape-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 2;
         }
 
+        /* Video */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            border: 5px solid white;
+            border: 8px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .video-container iframe {
@@ -135,40 +114,110 @@
             top: 0; left: 0; width: 100%; height: 100%;
         }
 
+        /* Polaroid Gallery */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .gallery img {
+            background: white;
+            padding: 12px 12px 45px 12px;
+            width: 90%;
+            border: 1px solid #eee;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .gallery img:nth-child(odd) { transform: rotate(-3deg); }
+        .gallery img:nth-child(even) { transform: rotate(3deg); }
+
+        /* Message Styling */
+        .message-card {
+            background: #fffde7;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            border-left: 8px solid #ffd54f;
+            transform: rotate(1deg);
+            text-align: left;
+        }
     </style>
 </head>
 <body>
 
     <div id="gatekeeper">
-        <div style="font-size: 3rem;">💌</div>
-        <h2 style="font-family: 'Dancing Script';">A Letter for You</h2>
-        <p>Enter our special date to open:</p>
-        <input type="password" id="passInput" placeholder="MMDDYY">
+        <div style="font-size: 3.5rem; margin-bottom: 10px;">💌</div>
+        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--primary-pink); margin: 0 0 10px 0;">For My Love</h2>
+        <p style="font-size: 0.9rem; color: #777;">Enter our special code to open:</p>
+        <input type="password" id="passInput" placeholder="Enter code...">
         <br>
         <button onclick="checkPassword()">Open Letter</button>
-        <p id="errorMsg" style="color: red; display: none; font-size: 0.8rem;">Try again, lover.</p>
+        <p id="errorMsg" style="color: #ff5252; display: none; font-size: 0.85rem; margin-top: 10px;">Oops! Try again, my love.</p>
     </div>
 
     <div id="dashboard">
         <div class="card">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Egy8RZKxC5k" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/Egy8RZKxC5k" frameborder="0" allowfullscreen></iframe>
             </div>
             <h1>Happy Birthday, Ma vie! 🎉</h1>
-            <p style="font-family: 'Indie Flower'; font-size: 1.1rem;">I built this little corner of the internet just for you.</p>
+            <p style="font-family: 'Indie Flower'; font-size: 1.1rem; color: #666;">A little corner of the internet, just for you.</p>
         </div>
 
         <div class="card" style="background: transparent; box-shadow: none;">
-            <h3>Our Memories 📸</h3>
+            <h3 style="font-size: 2.5rem; text-align: center;">Our Memories 📸</h3>
             <div class="gallery">
-                <img src="https://i.imgur.com/kmXZdMD.png" alt="Memory 1">
-                <img src="https://i.imgur.com/YNpKxsc.png" alt="Memory 2">
-                <img src="https://i.imgur.com/Y8xLDuq.png" alt="Memory 3">
+                <img src="https://i.imgur.com/kmXZdMD.png">
+                <img src="https://i.imgur.com/YNpKxsc.png">
+                <img src="https://i.imgur.com/Y8xLDuq.png">
             </div>
         </div>
 
         <div class="card message-card">
-            <h3>To the love of my life... 💌</h3>
-            <p>"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.
+            <h3 style="color: #fbc02d;">A Special Message 💌</h3>
+            <p>"Happy 29th Birthday to the love of my life! I’m so sorry that all I can give you right now is this greeting; I know I’ve been incredibly busy lately, but I want you to know how much I appreciate your constant understanding. Your kindness and patience mean the world to me.<br><br>
+            It’s your birthday, yet I feel like I’m the one receiving the gift because having you in my life is the greatest present I could ever ask for. I know life will bring challenges, but I truly believe we can overcome anything together. I can’t wait to see you soon and hold you close. Happy Birthday, my baby!"</p>
+        </div>
+    </div>
 
-            It’s your birthday, yet I feel like
+    <script>
+        function checkPassword() {
+            // The password is confirmed as 022797
+            const secret = "022797"; 
+            const input = document.getElementById('passInput').value;
+            const gate = document.getElementById('gatekeeper');
+            const dash = document.getElementById('dashboard');
+            const error = document.getElementById('errorMsg');
+
+            if (input.trim() === secret) {
+                // Hide the login box
+                gate.style.display = 'none';
+                
+                // Set the page background to scrollable
+                document.body.style.display = 'block';
+                document.body.style.paddingTop = '40px';
+                
+                // Show the content
+                dash.style.display = 'block';
+                // Trigger the fade-in
+                setTimeout(() => {
+                    dash.style.opacity = '1';
+                    window.scrollTo(0, 0);
+                }, 100);
+            } else {
+                error.style.display = 'block';
+                document.getElementById('passInput').value = ""; // Clear the input
+            }
+        }
+
+        // Allow pressing "Enter" key to unlock
+        document.getElementById('passInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
