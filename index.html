@@ -21,21 +21,23 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* --- LOGIN SECTION --- */
+        /* --- LOGIN SCREEN (Stay on Top) --- */
         #gatekeeper {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
             background: white;
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
             border: 6px double var(--primary-pink);
             max-width: 320px;
-            width: 90%;
-            position: relative;
-            z-index: 999; /* This keeps it above everything else */
+            width: 85%;
+            z-index: 10000; /* Highest priority */
         }
 
         input[type="password"] {
@@ -43,8 +45,8 @@
             border-radius: 10px;
             border: 2px solid var(--primary-pink);
             width: 80%;
-            margin-bottom: 1rem;
-            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 16px; 
             text-align: center;
             outline: none;
         }
@@ -53,117 +55,8 @@
             background: var(--primary-pink);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 15px 30px;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        button:active { transform: scale(0.95); }
-
-        /* --- DASHBOARD SECTION --- */
-        #dashboard {
-            display: none; 
-            width: 95%;
-            max-width: 600px;
-            padding: 40px 10px;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-
-        .card {
-            background: white;
-            padding: 1.5rem;
-            margin-bottom: 3.5rem;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-        }
-
-        h1, h3 { 
-            font-family: 'Dancing Script', cursive; 
-            color: var(--primary-pink);
-            margin: 0 0 10px 0;
-        }
-
-        /* Tape Effect */
-        .card::before {
-            content: "";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 35px;
-            background: var(--tape-color);
-            border: 1px solid rgba(0,0,0,0.05);
-            z-index: 2;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border: 8px solid white;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; border: 0;
-        }
-
-        .gallery {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .gallery img {
-            background: white;
-            padding: 12px 12px 45px 12px;
-            width: 90%;
-            border: 1px solid #eee;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .gallery img:nth-child(odd) { transform: rotate(-2deg); }
-        .gallery img:nth-child(even) { transform: rotate(2deg); }
-
-        .message-card {
-            background: #fffde7;
-            font-family: 'Indie Flower', cursive;
-            font-size: 1.25rem;
-            line-height: 1.6;
-            border-left: 8px solid #ffd54f;
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="gatekeeper">
-        <div style="font-size: 3.5rem; margin-bottom: 10px;">💌</div>
-        <h2 style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--primary-pink);">For My Love</h2>
-        <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Enter our special date to open:</p>
-        <input type="password" id="passInput" placeholder="MMDDYY">
-        <br>
-        <button id="unlockBtn" onclick="checkPassword()">Open Letter</button>
-        <p id="errorMsg" style="color: #ff5252; display: none; font-size: 0.85rem; margin-top: 15px;">Oops! Try again, my love.</p>
-    </div>
-
-    <div id="dashboard">
-        <div class="card">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Egy8RZKxC5k" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-            <h1>Happy Birthday, Ma vie! 🎉</h1>
-            <p style="font-family: 'Indie Flower'; font-size: 1.2rem;">A little corner of the internet, just for you.</p>
-        </div>
-
-        <div class="card" style="background: transparent; box-shadow: none;">
-            <h3 style="font-size: 2.5rem; text-align: center;">Our Memories 📸</h3>
-            <div class="gallery">
-                <img src="
+            font-size: 1.1rem
